@@ -14,7 +14,6 @@ body {
 
 
 .wrapper {
-    min-height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -79,4 +78,15 @@ body {
 @keyframes fade {
     from { opacity: 1; }
     to   { opacity: 0; }
+}
+
+@media screen and (max-width: 1000px) {
+    .high-scores {
+        position: relative;
+        margin: 24px auto;
+    }
+
+    .high-scores table {
+        margin: 0 auto;
+    }
 }
