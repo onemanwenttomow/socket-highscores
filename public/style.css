@@ -41,7 +41,7 @@ body {
     height: 100px;
     border-radius: 50%;
     background-image: linear-gradient(
-        pink,
+        #F4E022,
         white
     );
 }
@@ -74,6 +74,26 @@ body {
 .hidden {
     display: none;
 }
+
+table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+thead {
+    background-color: #18224B;
+    color: #ffffff;
+    text-align: left;
+}
+
+td, th {
+    padding: 4px 8px
+}
+
+
 
 @keyframes fade {
     from { opacity: 1; }

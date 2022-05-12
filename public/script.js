@@ -78,7 +78,7 @@
     }
  
     function createTable(scores) {
-        let table = `<table><tr><th>Player Name</th> <th>Time</th> <th>Date</th></tr>`;
+        let table = `<table><thead><th>Player Name</th> <th>Time</th> <th>Date</th></thead>`;
         scores.forEach((score) => {
             table += `<tr><td>${score.player}</td><td>${score.time}</td><td>${formatDate(
                 score.created_at,
