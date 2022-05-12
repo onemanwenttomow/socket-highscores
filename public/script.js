@@ -10,6 +10,7 @@
     startBtn.addEventListener('click', handleStartClick);
     stopBtn.addEventListener('click', handleStopClick);
     saveBtn.addEventListener('click', handleSaveClick);
+    result.addEventListener('click', handleAgainClick);
 
     const timeGoal = 10000;
     const scores = await getScores();
@@ -35,14 +36,20 @@
         stopBtn.classList.remove('hidden');
         timeStart = new Date().getTime();
         intervalId = setInterval(() => {
+            console.log('interval....');
             elapsedTime++;
             if (elapsedTime <= 3) {
                 helper.classList.add('blurry');
                 setTimeout(() => helper.classList.remove('blurry'), 900);
-            } else {
-                helper.innerText = '';
             }
         }, 1000);
+    }
+
+    function handleAgainClick() {
+        result.classList.add("hidden");
+        helper.classList.remove("hidden");
+        elapsedTime = 0;
+        handleStartClick();
     }
 
     function handleStopClick() {
@@ -54,7 +61,7 @@
         timeEnd = new Date().getTime();
         totalTime = timeEnd - timeStart;
 
-        result.innerText = (timeGoal - totalTime).toString() + "ms";
+        result.innerHTML = `<div>${(timeGoal - totalTime).toString()}ms</div><div class="again-btn">Play Again?</div>`;
         sendToServer();
 
         const newScores = calculateNewScores(scores, {
