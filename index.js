@@ -1,6 +1,14 @@
 const express = require('express');
 const app = express();
+const server = require('http').Server(app);
 const db = require('./db');
+const io = require('socket.io')(server, {
+    allowRequest: (req, callback) =>
+        callback(
+            null,
+            req.headers.referer.startsWith("http://localhost:8080")
+        )
+});
 
 app.use(express.static('public'));
 app.use(express.json());
@@ -26,4 +34,18 @@ app.get('/api/reset', async (req, res) => {
     }
 });
 
-app.listen(process.env.PORT || 8080, () => console.log("up and running..."));
+server.listen(process.env.PORT || 8080, () => console.log("up and running...")); // it's server, not app, that does the listening
+
+io.on('connection', async function (socket) {
+    console.log(`socket with the id ${socket.id} is now connected`);
+    const scores = await db.getScores();
+    socket.emit("leaderboard", scores)
+
+    socket.on('addScore', async (score) => {
+        await db.insertScore(score);
+        const scores = await db.getScores();
+        console.log('scores: ', scores.length);
+        console.log('about to emit...');
+        io.emit("leaderboard", scores)
+    })
+});
