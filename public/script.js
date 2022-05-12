@@ -6,27 +6,28 @@
     const highScores = document.querySelector('.high-scores');
     const input = document.querySelector('#user-name');
     const saveBtn = document.querySelector('.save-btn');
+    
+    let timeStart, timeEnd, totalTime, intervalId, scores;
+    const timeGoal = 10000;
+    let elapsedTime = 0;
+    let username = localStorage.getItem("username") || 'unknown';
 
     startBtn.addEventListener('click', handleStartClick);
     stopBtn.addEventListener('click', handleStopClick);
     saveBtn.addEventListener('click', handleSaveClick);
     result.addEventListener('click', handleAgainClick);
-
-    const timeGoal = 10000;
-    const scores = await getScores();
-    let timeStart, timeEnd, totalTime, intervalId;
-    let elapsedTime = 0;
-    let username = localStorage.getItem("username") || 'unknown';
-
+    
+    
     if (localStorage.getItem("username")) {
         input.classList.add("hidden");
         saveBtn.classList.add("hidden");
         document.querySelector(".username").innerText = username;
     }
-
+    
+    scores = await getScores();
     addHighScores(scores);
 
-    async function addHighScores(scores) {
+    function addHighScores(scores) {
         const tableHtml = createTable(scores);
         highScores.innerHTML = tableHtml;
     }
@@ -36,7 +37,6 @@
         stopBtn.classList.remove('hidden');
         timeStart = new Date().getTime();
         intervalId = setInterval(() => {
-            console.log('interval....');
             elapsedTime++;
             if (elapsedTime <= 3) {
                 helper.classList.add('blurry');
@@ -109,8 +109,8 @@
         return data;
     }
 
-    async function sendToServer() {
-        await fetch('/api/add-score', {
+    function sendToServer() {
+        fetch('/api/add-score', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
