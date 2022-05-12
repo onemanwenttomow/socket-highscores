@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <title>Timing Game</title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <h1>Count to 10</h1>
+            <div class="username-wrapper">
+                <input type="text" name="username" id="user-name" placeholder="username..." />
+                <button class="save-btn">Save</button>
+                <div class="username"></div>
+            </div>
+            
+            <div class="game-wrapper">
+                <div class="gradient helper"></div>
+                <div class="btn gradient regular start-btn">Start</div>
+                <div class="btn gradient regular stop-btn hidden">Stop</div>
+                <div class="gradient regular result hidden"></div>
+            </div>
+    
+
+        </div>
+
+        <div class="high-scores"></div>
+
+        <script src="script.js"></script>
+    </body>
+</html>
