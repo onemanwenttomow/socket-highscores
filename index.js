@@ -26,4 +26,4 @@ app.get('/api/reset', async (req, res) => {
     }
 });
 
-app.listen(8080, () => console.log('server up and running'));
+app.listen(process.env.PORT || 8080, () => console.log("up and running..."));
