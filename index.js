@@ -6,7 +6,7 @@ const io = require('socket.io')(server, {
     allowRequest: (req, callback) =>
         callback(
             null,
-            req.headers.referer.startsWith("http://localhost:8080")
+            req.headers.referer.startsWith("http://localhost:8080") || req.headers.referer.startsWith("https://sockets-leaderboard.herokuapp.com/")
         )
 });
 
